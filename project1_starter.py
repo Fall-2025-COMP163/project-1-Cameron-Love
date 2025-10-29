@@ -62,24 +62,22 @@ def calculate_stats(character_class, level):
         return None
 
 def save_character(character, filename):
-    valid_file = True #Boolean that will be used later to handle invalid class file
-
-    with open (filename, "w+") as character_file: # Writes character stats in text file by access character dictionary values
-        character_file.write(f"Character Name: {character["name"]}\n")
-        character_file.write(f"Class: {character["class"]}\n")
-        character_file.write(f"Level: {character["level"]}\n")
-        character_file.write(f"Strength: {character["strength"]}\n")
-        character_file.write(f"Magic: {character["magic"]}\n")
-        character_file.write(f"Health: {character["health"]}\n")
-        character_file.write(f"Gold: {character["gold"]}\n")
     
-    if os.path.isfile(filename) == True: #If filename is an existing file then this will return true
-        valid_file = True
-    else:
-        valid_file = False
-
-    return valid_file
+    try:
+        with open (filename, "w+") as character_file: # Writes character stats in text file by access character dictionary values
+            character_file.write(f"Character Name: {character["name"]}\n")
+            character_file.write(f"Class: {character["class"]}\n")
+            character_file.write(f"Level: {character["level"]}\n")
+            character_file.write(f"Strength: {character["strength"]}\n")
+            character_file.write(f"Magic: {character["magic"]}\n")
+            character_file.write(f"Health: {character["health"]}\n")
+            character_file.write(f"Gold: {character["gold"]}\n")
         
+        return True
+        
+    except (IOError, FileNotFoundError):
+        #Return False to signal that the save failed gracefully.
+        return False
 
 
 def load_character(filename):
