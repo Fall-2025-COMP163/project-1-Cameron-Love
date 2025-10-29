@@ -60,3 +60,56 @@ def calculate_stats(character_class, level):
     else: #Returns error message and none if user enters invald class
         print(f"Error: '{character_class}' is not a valid class.")
         return None
+
+def save_character(character, filename):
+    valid_file = True #Boolean that will be used later to handle invalid class file
+
+    with open (filename, "w+") as character_file: # Writes character stats in text file by access character dictionary values
+        character_file.write(f"Character name: {character["name"]}\n")
+        character_file.write(f"class: {character["class"]}\n")
+        character_file.write(f"level: {character["level"]}\n")
+        character_file.write(f"strength: {character["strength"]}\n")
+        character_file.write(f"magic: {character["magic"]}\n")
+        character_file.write(f"health: {character["health"]}\n")
+        character_file.write(f"gold: {character["gold"]}\n")
+    
+    if os.path.isfile(filename) == True: #If filename is an existing file then this will return true
+        valid_file = True
+    else:
+        valid_file = False
+
+    return valid_file
+        
+
+
+def load_character(filename):
+    
+    if os.path.isfile(filename) == True: #File will only open if it already exist
+        with open(filename, "r") as character_file:
+            character_stats = character_file.readlines() #Reads the file and returns a list of strings where the first element is the first line and so on
+            
+            #Seperates the left and right of the colon, mainly get the string to the right of the colon. Then accesses the name using index [1] and .strip to get rid of the newline
+            character_class = character_stats[1].split(': ')[1].strip()
+            name = character_stats[0].split(': ')[1].strip()
+            level = int(character_stats[2].split(': ')[1].strip())
+            strength = int(character_stats[3].split(': ')[1].strip())
+            magic = int(character_stats[4].split(': ')[1].strip())
+            health = int(character_stats[5].split(': ')[1].strip())
+            gold = int(character_stats[5].split(': ')[1].strip())
+
+            #Reassigns the characters stats
+            character = {
+                "name" : {name},
+                "class" : {character_class},
+                "level" : {level},
+                "strength" : {strength},
+                "magic" : {magic},
+                "health" : {health},
+                "gold" : {gold}
+            }
+
+            return character #Returns the character dictionary
+    else: # If the file does not exist then the fuction returns none
+        return None
+    
+    
