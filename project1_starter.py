@@ -1,102 +1,62 @@
 """
 COMP 163 - Project 1: Character Creator & Saving/Loading
-Name: [Your Name Here]
-Date: [Date]
+name: Cameron Love
+Date: October 29th, 2025
 
-AI Usage: [Document any AI assistance used]
-Example: AI helped with file I/O error handling logic in save_character function
+AI Usage: AI helped walk me through how I can change my code to only accept valid classes. As well as helped me parse the data in the load character function
 """
+import os
+import random
 
 def create_character(name, character_class):
-    """
-    Creates a new character dictionary with calculated stats
-    Returns: dictionary with keys: name, class, level, strength, magic, health, gold
     
-    Example:
-    char = create_character("Aria", "Mage")
-    # Should return: {"name": "Aria", "class": "Mage", "level": 1, "strength": 5, "magic": 15, "health": 80, "gold": 100}
-    """
-    # TODO: Implement this function
-    # Remember to use calculate_stats() function for stat calculation
-    pass
+    character_stats = calculate_stats(character_class, 1) # Calls the calculate_stats function and assigns the charaters stats based on what class they selected
+
+    if character_stats == None: #If the user entered an invalid class then then create character function returns None
+        return None
+
+    character = { #Creates users character
+        "name" : name,
+        "class" : character_class,
+        "level" : 1,
+        "strength" : character_stats[0],
+        "magic" : character_stats[1],
+        "health" : character_stats[2],
+        "gold" : 0
+    }
+
+    return character #Returns the character dictionary
 
 def calculate_stats(character_class, level):
-    """
-    Calculates base stats based on class and level
-    Returns: tuple of (strength, magic, health)
-    
-    Design your own formulas! Ideas:
-    - Warriors: High strength, low magic, high health
-    - Mages: Low strength, high magic, medium health  
-    - Rogues: Medium strength, medium magic, low health
-    - Clerics: Medium strength, high magic, high health
-    """
-    # TODO: Implement this function
-    # Return a tuple: (strength, magic, health)
-    pass
+    valid_class = True #Boolean that will be used later to handle invalid class input
+    #Initializing stats
+    strength = 0
+    magic = 0
+    health = 0
 
-def save_character(character, filename):
-    """
-    Saves character to text file in specific format
-    Returns: True if successful, False if error occurred
-    
-    Required file format:
-    Character Name: [name]
-    Class: [class]
-    Level: [level]
-    Strength: [strength]
-    Magic: [magic]
-    Health: [health]
-    Gold: [gold]
-    """
-    # TODO: Implement this function
-    # Remember to handle file errors gracefully
-    pass
+    #Assigns character stats based on class selection and level
+    if character_class == "Warrior":
+        strength = 58 + (level * 2)
+        magic = 18 + (level * 2)
+        health = 58 + (level * 2)
+    elif character_class == "Mage":
+        strength = 18 + (level * 2)
+        magic = 58 + (level * 2)
+        health = 38 + (level * 2)
+    elif character_class == "Rogue":
+        strength = 38 + (level * 2)
+        magic = 38 + (level * 2)
+        health = 18 + (level * 2)
+    elif character_class == "Cleric":
+        strength = 38 + (level * 2)
+        magic = 58 + (level * 2)
+        health = 58 + (level * 2)
+    else:
+        valid_class = False # If the user enters something other then the 4 valid classes then valid class turns false
 
-def load_character(filename):
-    """
-    Loads character from text file
-    Returns: character dictionary if successful, None if file not found
-    """
-    # TODO: Implement this function
-    # Remember to handle file not found errors
-    pass
-
-def display_character(character):
-    """
-    Prints formatted character sheet
-    Returns: None (prints to console)
-    
-    Example output:
-    === CHARACTER SHEET ===
-    Name: Aria
-    Class: Mage
-    Level: 1
-    Strength: 5
-    Magic: 15
-    Health: 80
-    Gold: 100
-    """
-    # TODO: Implement this function
-    pass
-
-def level_up(character):
-    """
-    Increases character level and recalculates stats
-    Modifies the character dictionary directly
-    Returns: None
-    """
-    # TODO: Implement this function
-    # Remember to recalculate stats for the new level
-    pass
-
-# Main program area (optional - for testing your functions)
-if __name__ == "__main__":
-    print("=== CHARACTER CREATOR ===")
-    print("Test your functions here!")
-    
-    # Example usage:
-    # char = create_character("TestHero", "Warrior")
-    # display_character(char)
-    # save_character(char, "my_character.txt")
-    # loaded = load_character("my_character.txt")
+    if  valid_class == True: # Returns character stats if user enters valid class
+        character_stats = (strength, magic, health)
+        return character_stats
+    else: #Returns error message and none if user enters invald class
+        print(f"Error: '{character_class}' is not a valid class.")
+        return None
