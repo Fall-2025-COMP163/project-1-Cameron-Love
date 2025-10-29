@@ -3,7 +3,7 @@ COMP 163 - Project 1: Character Creator & Saving/Loading
 name: Cameron Love
 Date: October 29th, 2025
 
-AI Usage: AI helped walk me through how I can change my code to only accept valid classes. Helped me parse the data in the load character function. As well as helping me with my git commits
+AI Usage: AI helped walk me through how I can change my code to only accept valid classes. Helped me parse the data in the load character function, plus helped with file I/O error handling logic in save_character function. As well as helping me with my git commits
 """
 import os
 import random
@@ -64,7 +64,7 @@ def calculate_stats(character_class, level):
 def save_character(character, filename):
     
     try:
-        with open (filename, "w+") as character_file: # Writes character stats in text file by access character dictionary values
+        with open (filename, "w+", encoding="utf-8") as character_file: # Writes character stats in text file by access character dictionary values
             character_file.write(f"Character Name: {character["name"]}\n")
             character_file.write(f"Class: {character["class"]}\n")
             character_file.write(f"Level: {character["level"]}\n")
