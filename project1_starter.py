@@ -134,3 +134,119 @@ def level_up(character):
     character["strength"] = new_stats[0] 
     character["magic"] = new_stats[1]
     character["health"] = new_stats[2]
+
+
+"""
+Function I created for bonus points. Added a dodge and block stat
+"""
+
+def extensive_stat_calculate(character_class, level):
+    valid_class = True
+    strength = 0
+    magic = 0
+    health = 0
+    dodge = 0
+    block = 0 
+
+    if character_class == "Warrior":
+        strength = 58 + (level * 2)
+        magic = 18 + (level * 2)
+        health = 58 + (level * 2)
+        dodge = 18 + (level * 2)
+        block = 58 + (level * 2)
+    elif character_class == "Mage":
+        strength = 18 + (level * 2)
+        magic = 58 + (level * 2)
+        health = 38 + (level * 2)
+        dodge = 38 + (level * 2)
+        block = 18 + (level * 2)
+    elif character_class == "Rogue":
+        strength = 38 + (level * 2)
+        magic = 38 + (level * 2)
+        health = 18 + (level * 2)
+        dodge = 58 + (level * 2)
+        block = 18 + (level * 2)
+    elif character_class == "Cleric":
+        strength = 38 + (level * 2)
+        magic = 58 + (level * 2)
+        health = 58 + (level * 2)
+        dodge = 38 + (level * 2)
+        block = 38 + (level * 2)
+
+    else:
+        valid_class = False
+
+    if  valid_class == True:
+        character_stats = (strength, magic, health, dodge, block)
+        return character_stats
+    else:
+        print(f"Error: '{character_class}' is not a valid class.")
+        return None
+
+"""
+Function I created for bonus points. Gives each class 2 specil abilities that temporarily boost their stats
+"""
+
+def special_abilities(character_class, level):
+
+    buffed_stats = extensive_stat_calculate(character_class, level) #Grabs stats from extensive_stat_calculate function
+    
+    if buffed_stats is None: #Returns None if extensive_stat_calculate returns None
+        return None
+
+    #Assigns stat names to stat numbers from characters orginal stats
+    strength = buffed_stats[0]
+    magic = buffed_stats[1]
+    health = buffed_stats[2]
+    dodge = buffed_stats[3]
+    block = buffed_stats[4]
+
+    """
+    Each class comes with two unique special abilities that Temporarily one of their stats.
+    Special abilities are based off of the archetype of the class
+    User enters the string 1 or 2 to choose between special abilities
+    """
+
+    if character_class == "Warrior":
+        print("Choose your special ability!")
+        user_input =  input("1) Last Stance (Temporarily Boost HP *only works if 20 hp*)\n2) Rage (Temporarily Boost Strength)\n")
+        if user_input == "1":
+            if health <= 20:
+                health += (40 + (level * 2))
+        elif user_input == "2":
+            strength += (20 + (level * 2))
+        else:
+            print("Wrong Input")
+    
+    if character_class == "Mage":
+        print("Choose your special ability!")
+        user_input =  input("1) Magic Musisarus (Temporarily Boost Magic Stat) \n2) Healing of Osiris (Temporarily Boost HP)\n")
+        if user_input == "1":
+            magic += (20 + (level * 2))
+        elif user_input == "2":
+            health += (20 + (level * 2))
+        else:
+            print("Wrong Input")
+    
+    if character_class == "Rogue":
+        print("Choose your special ability!")
+        user_input =  input("1) Assasination (50% Chance of Insta-Kill) \n2) Perfect Dodge(100% Of Dodging Incoming Attack)\n")
+        if user_input == "1":
+            rand_num = random.randrange(1,11) #Uses the random module to generate a random number from 1-10
+            if rand_num >= 6:
+                strength += 400
+        elif user_input == "2":
+            dodge += 400
+        else:
+            print("Wrong Input")
+    if character_class == "Cleric":
+        print("Choose your special ability!")
+        user_input =  input("1) Armor Boost (Temporarily Boost Block) \n2) Health Boost(Temporarily Boost HP)\n")
+        if user_input == "1":
+            block += (20 + (level * 2))
+        elif user_input == "2":
+            health += (20 + (level * 2))
+        else:
+            print("Wrong Input")
+    
+    return (strength, magic, health, dodge, block) #Returns the temporarily buffed stats
