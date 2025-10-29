@@ -63,6 +63,15 @@ def calculate_stats(character_class, level):
 
 def save_character(character, filename):
     
+    if filename == "" or filename is None: # validate filename
+        print("Error: Invalid filename")
+        return False 
+
+    directory = os.path.dirname(filename) # check if directory exists
+    if directory and not os.path.exists(directory):
+        print("Error: Directory does not exist")
+        return False
+    
     with open (filename, "w+", encoding="utf-8") as character_file: # Writes character stats in text file by access character dictionary values
         character_file.write(f"Character Name: {character["name"]}\n")
         character_file.write(f"Class: {character["class"]}\n")
@@ -71,11 +80,7 @@ def save_character(character, filename):
         character_file.write(f"Magic: {character["magic"]}\n")
         character_file.write(f"Health: {character["health"]}\n")
         character_file.write(f"Gold: {character["gold"]}\n")
-    
-    if os.path.isfile(rf"C:\Users\camer\github-classroom\Fall-2025-COMP163\project-1-Cameron-Love\{filename}") == True:
-        return True 
-    else:
-        return False
+        return True
 
 
 def load_character(filename):
