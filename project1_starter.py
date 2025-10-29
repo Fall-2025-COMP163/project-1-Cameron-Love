@@ -63,25 +63,24 @@ def calculate_stats(character_class, level):
 
 def save_character(character, filename):
     
-    if os.path.isfile(filename) == True:
-        with open (filename, "w+", encoding="utf-8") as character_file: # Writes character stats in text file by access character dictionary values
-            character_file.write(f"Character Name: {character["name"]}\n")
-            character_file.write(f"Class: {character["class"]}\n")
-            character_file.write(f"Level: {character["level"]}\n")
-            character_file.write(f"Strength: {character["strength"]}\n")
-            character_file.write(f"Magic: {character["magic"]}\n")
-            character_file.write(f"Health: {character["health"]}\n")
-            character_file.write(f"Gold: {character["gold"]}\n")
+    with open (filename, "w+", encoding="utf-8") as character_file: # Writes character stats in text file by access character dictionary values
+        character_file.write(f"Character Name: {character["name"]}\n")
+        character_file.write(f"Class: {character["class"]}\n")
+        character_file.write(f"Level: {character["level"]}\n")
+        character_file.write(f"Strength: {character["strength"]}\n")
+        character_file.write(f"Magic: {character["magic"]}\n")
+        character_file.write(f"Health: {character["health"]}\n")
+        character_file.write(f"Gold: {character["gold"]}\n")
     
-        return True
-        
+    if os.path.isfile(rf"C:\Users\camer\github-classroom\Fall-2025-COMP163\project-1-Cameron-Love\{filename}") == True:
+        return True 
     else:
         return False
 
 
 def load_character(filename):
     
-    if os.path.isfile(filename) == True: #File will only open if it already exist
+    if os.path.isfile(rf"C:\Users\camer\github-classroom\Fall-2025-COMP163\project-1-Cameron-Love\{filename}") == True: #File will only open if it already exist
         with open(filename, "r", encoding="utf-8") as character_file:
             character_stats = character_file.readlines() #Reads the file and returns a list of strings where the first element is the first line and so on
             
