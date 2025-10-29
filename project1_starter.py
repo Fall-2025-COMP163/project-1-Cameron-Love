@@ -66,12 +66,12 @@ def save_character(character, filename):
 
     with open (filename, "w+") as character_file: # Writes character stats in text file by access character dictionary values
         character_file.write(f"Character Name: {character["name"]}\n")
-        character_file.write(f"class: {character["class"]}\n")
-        character_file.write(f"level: {character["level"]}\n")
-        character_file.write(f"strength: {character["strength"]}\n")
-        character_file.write(f"magic: {character["magic"]}\n")
-        character_file.write(f"health: {character["health"]}\n")
-        character_file.write(f"gold: {character["gold"]}\n")
+        character_file.write(f"Class: {character["class"]}\n")
+        character_file.write(f"Level: {character["level"]}\n")
+        character_file.write(f"Strength: {character["strength"]}\n")
+        character_file.write(f"Magic: {character["magic"]}\n")
+        character_file.write(f"Health: {character["health"]}\n")
+        character_file.write(f"Gold: {character["gold"]}\n")
     
     if os.path.isfile(filename) == True: #If filename is an existing file then this will return true
         valid_file = True
