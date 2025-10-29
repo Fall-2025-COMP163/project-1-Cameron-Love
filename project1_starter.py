@@ -3,7 +3,7 @@ COMP 163 - Project 1: Character Creator & Saving/Loading
 name: Cameron Love
 Date: October 29th, 2025
 
-AI Usage: AI helped walk me through how I can change my code to only accept valid classes. As well as helped me parse the data in the load character function
+AI Usage: AI helped walk me through how I can change my code to only accept valid classes. Helped me parse the data in the load character function. As well as helping me with my git commits
 """
 import os
 import random
@@ -250,3 +250,10 @@ def special_abilities(character_class, level):
             print("Wrong Input")
     
     return (strength, magic, health, dodge, block) #Returns the temporarily buffed stats
+
+if __name__ == "__main__": #Space to test my function
+    print("Welcome Player 1!")
+    char = create_character("TestHero", "Warrior")
+    display_character(char)
+    save_character(char, "my_character.txt")
+    loaded = load_character("my_character.txt")
