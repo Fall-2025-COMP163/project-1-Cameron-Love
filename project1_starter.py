@@ -63,7 +63,7 @@ def calculate_stats(character_class, level):
 
 def save_character(character, filename):
     
-    try:
+    if os.path.isfile(filename) == True:
         with open (filename, "w+", encoding="utf-8") as character_file: # Writes character stats in text file by access character dictionary values
             character_file.write(f"Character Name: {character["name"]}\n")
             character_file.write(f"Class: {character["class"]}\n")
@@ -72,11 +72,10 @@ def save_character(character, filename):
             character_file.write(f"Magic: {character["magic"]}\n")
             character_file.write(f"Health: {character["health"]}\n")
             character_file.write(f"Gold: {character["gold"]}\n")
-        
+    
         return True
         
-    except (IOError, FileNotFoundError):
-        #Return False to signal that the save failed gracefully.
+    else:
         return False
 
 

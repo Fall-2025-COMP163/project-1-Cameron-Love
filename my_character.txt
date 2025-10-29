@@ -1,7 +1,7 @@
-Character name: TestHero
-class: Warrior
-level: 1
-strength: 60
-magic: 20
-health: 60
-gold: 0
+Character Name: TestHero
+Class: Warrior
+Level: 1
+Strength: 60
+Magic: 20
+Health: 60
+Gold: 0
