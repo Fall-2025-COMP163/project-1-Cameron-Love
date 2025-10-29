@@ -112,4 +112,25 @@ def load_character(filename):
     else: # If the file does not exist then the fuction returns none
         return None
     
+
+def display_character(character): #Simply displays the character stats in the console
+    print("=== CHARACTER SHEET ===")
+    print(f"name : {character['name']}")
+    print(f"class : {character['class']}")
+    print(f"level : {character['level']}")
+    print(f"strength : {character['strength']}")
+    print(f"magic : {character['magic']}")
+    print(f"health : {character['health']}")
+    print(f"gold : {character['gold']}")
+
+
+def level_up(character): 
     
+    character["level"] += 1 #Adds a level to the character
+    
+    new_stats = calculate_stats(character["class"], character["level"]) # Calcules the characters new stats with the additional level
+
+    #Assigns the new stats to the original character stats
+    character["strength"] = new_stats[0] 
+    character["magic"] = new_stats[1]
+    character["health"] = new_stats[2]
