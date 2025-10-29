@@ -65,7 +65,7 @@ def save_character(character, filename):
     valid_file = True #Boolean that will be used later to handle invalid class file
 
     with open (filename, "w+") as character_file: # Writes character stats in text file by access character dictionary values
-        character_file.write(f"Character name: {character["name"]}\n")
+        character_file.write(f"Character Name: {character["name"]}\n")
         character_file.write(f"class: {character["class"]}\n")
         character_file.write(f"level: {character["level"]}\n")
         character_file.write(f"strength: {character["strength"]}\n")
@@ -95,17 +95,17 @@ def load_character(filename):
             strength = int(character_stats[3].split(': ')[1].strip())
             magic = int(character_stats[4].split(': ')[1].strip())
             health = int(character_stats[5].split(': ')[1].strip())
-            gold = int(character_stats[5].split(': ')[1].strip())
+            gold = int(character_stats[6].split(': ')[1].strip())
 
             #Reassigns the characters stats
             character = {
-                "name" : {name},
-                "class" : {character_class},
-                "level" : {level},
-                "strength" : {strength},
-                "magic" : {magic},
-                "health" : {health},
-                "gold" : {gold}
+                "name" : name,
+                "class" : character_class,
+                "level" : level,
+                "strength" : strength,
+                "magic" : magic,
+                "health" : health,
+                "gold" : gold
             }
 
             return character #Returns the character dictionary
