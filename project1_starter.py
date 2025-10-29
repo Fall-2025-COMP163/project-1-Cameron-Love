@@ -83,7 +83,7 @@ def save_character(character, filename):
 def load_character(filename):
     
     if os.path.isfile(filename) == True: #File will only open if it already exist
-        with open(filename, "r") as character_file:
+        with open(filename, "r", encoding="utf-8") as character_file:
             character_stats = character_file.readlines() #Reads the file and returns a list of strings where the first element is the first line and so on
             
             #Seperates the left and right of the colon, mainly get the string to the right of the colon. Then accesses the name using index [1] and .strip to get rid of the newline
