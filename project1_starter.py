@@ -1,5 +1,5 @@
 """
-COMP 163 - Project 1: Character Creator & Saving/Loading
+COMP 163 - Project 1: Character Creator & Saving/Loading.
 name: Cameron Love
 Date: October 29th, 2025
 
