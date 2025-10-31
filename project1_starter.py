@@ -85,34 +85,35 @@ def save_character(character, filename):
 
 def load_character(filename):
     
-    if os.path.isfile(rf"C:\Users\camer\github-classroom\Fall-2025-COMP163\project-1-Cameron-Love\{filename}") == True: #File will only open if it already exist
-        with open(filename, "r", encoding="utf-8") as character_file:
-            character_stats = character_file.readlines() #Reads the file and returns a list of strings where the first element is the first line and so on
-            
-            #Seperates the left and right of the colon, mainly get the string to the right of the colon. Then accesses the name using index [1] and .strip to get rid of the newline
-            character_class = character_stats[1].split(': ')[1].strip()
-            name = character_stats[0].split(': ')[1].strip()
-            level = int(character_stats[2].split(': ')[1].strip())
-            strength = int(character_stats[3].split(': ')[1].strip())
-            magic = int(character_stats[4].split(': ')[1].strip())
-            health = int(character_stats[5].split(': ')[1].strip())
-            gold = int(character_stats[6].split(': ')[1].strip())
-
-            #Reassigns the characters stats
-            character = {
-                "name" : name,
-                "class" : character_class,
-                "level" : level,
-                "strength" : strength,
-                "magic" : magic,
-                "health" : health,
-                "gold" : gold
-            }
-
-            return character #Returns the character dictionary
-    else: # If the file does not exist then the fuction returns none
+    if not os.path.exists(filename):
+        print("Error: File not found")
         return None
     
+
+    with open(filename, "r", encoding="utf-8") as character_file:
+        character_stats = character_file.readlines() #Reads the file and returns a list of strings where the first element is the first line and so on
+        
+        #Seperates the left and right of the colon, mainly get the string to the right of the colon. Then accesses the name using index [1] and .strip to get rid of the newline
+        character_class = character_stats[1].split(': ')[1].strip()
+        name = character_stats[0].split(': ')[1].strip()
+        level = int(character_stats[2].split(': ')[1].strip())
+        strength = int(character_stats[3].split(': ')[1].strip())
+        magic = int(character_stats[4].split(': ')[1].strip())
+        health = int(character_stats[5].split(': ')[1].strip())
+        gold = int(character_stats[6].split(': ')[1].strip())
+
+        #Reassigns the characters stats
+        character = {
+            "name" : name,
+            "class" : character_class,
+            "level" : level,
+            "strength" : strength,
+            "magic" : magic,
+            "health" : health,
+            "gold" : gold
+        }
+
+        return character #Returns the character dictionary
 
 def display_character(character): #Simply displays the character stats in the console
     print("=== CHARACTER SHEET ===")
